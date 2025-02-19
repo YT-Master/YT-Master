@@ -3,36 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My YouTube Tool</title>
+    <title>YouTube Tool Website</title>
 </head>
 <body>
-    <h1>Welcome to My YouTube Tool</h1>
-    <p>Enter your YouTube video title to get suggestions.</p>
-<input type="text" id="videoTitle" placeholder="Enter YouTube Title">
-<button onclick="getSuggestions()">Get Suggestions</button>
+    <h1>Welcome to YouTube Tool Website</h1>
+    <p>Enter your YouTube video title to get optimized SEO-friendly suggestions and thumbnails.</p>
+    
+    <input type="text" id="videoTitle" placeholder="Enter Video Title">
+    <button onclick="getSuggestions()">Get Suggestions</button>
+    
+    <h2>SEO-Friendly Titles:</h2>
+    <ul id="titleSuggestions"></ul>
+    
+    <h2>Thumbnail Suggestions:</h2>
+    <div id="thumbnailResults"></div>
 
-<h2>Suggested Titles:</h2>
-<ul id="suggestions"></ul>
-
-<script>
-    function getSuggestions() {
-        let title = document.getElementById("videoTitle").value;
-        let suggestions = [
-            title + " - Best Tips",
-            title + " - 2025 Guide",
-            "How to " + title,
-            title + " Explained",
-            "Ultimate " + title + " Tutorial"
-        ];
-
-        let list = document.getElementById("suggestions");
-        list.innerHTML = "";
-        suggestions.forEach(s => {
-            let li = document.createElement("li");
-            li.textContent = s;
-            list.appendChild(li);
-        });
-    }
-</script>
+    <script src="script.js"></script>
 </body>
 </html>
