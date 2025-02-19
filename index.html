@@ -3,21 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YouTube Tool Website</title>
+    <title>YouTube Thumbnail & SEO Tool</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Welcome to YouTube Tool Website</h1>
-    <p>Enter your YouTube video title to get optimized SEO-friendly suggestions and thumbnails.</p>
-    
-    <input type="text" id="videoTitle" placeholder="Enter Video Title">
-    <button onclick="getSuggestions()">Get Suggestions</button>
-    
-    <h2>SEO-Friendly Titles:</h2>
-    <ul id="titleSuggestions"></ul>
-    
-    <h2>Thumbnail Suggestions:</h2>
-    <div id="thumbnailResults"></div>
-
+    <div class="container">
+        <h1>YouTube Tool: Thumbnail & SEO Title Finder</h1>
+        <input type="text" id="searchQuery" placeholder="Enter YouTube Video Title">
+        <button onclick="searchThumbnails()">Search</button>
+        <div id="results"></div>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
