@@ -58,26 +58,22 @@
             color: #e74c3c;
         }
 
-        /* Tool Section (Cards) */
+        /* Tool Section (Cards) – Inspired by Best Hotels Style */
         .tool-section {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
+            gap: 15px;
             margin: 20px 0;
         }
         .tool-card {
             background-color: #ffffff;
             border-radius: 15px;
-            padding: 20px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             text-align: center;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
-        }
-        .tool-card:hover {
-            transform: translateY(-5px);
         }
         .tool-card h2, .tool-card p {
-            margin: 0;
+            margin: 10px 0;
         }
         .three-d-box {
             background: linear-gradient(45deg, #ffffff, #e74c3c);
@@ -87,7 +83,6 @@
             text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
             font-weight: bold;
             display: inline-block;
-            margin: 10px 0;
         }
         .click-here {
             font-size: 1.2rem;
@@ -97,6 +92,12 @@
             width: 50px;
             height: 50px;
             margin: 20px auto;
+        }
+        .coming-soon {
+            font-size: 1.5rem;
+            color: #2ecc71;
+            font-weight: bold;
+            margin: 80px 0; /* Center vertically in card */
         }
 
         /* Footer */
@@ -161,10 +162,10 @@
             </div>
             <img src="https://via.placeholder.com/50" alt="Logo" class="logo-between">
             <div class="tool-card">
-                <h2 class="three-d-box" style="font-size: 1.5rem;">Coming Soon</h2>
+                <h2 class="coming-soon">Coming Soon</h2>
             </div>
             <div class="tool-card">
-                <h2 class="three-d-box" style="font-size: 1.5rem;">Coming Soon</h2>
+                <h2 class="coming-soon">Coming Soon</h2>
             </div>
         </div>
 
@@ -179,12 +180,12 @@
     </div>
 
     <script>
-        // Simple click event for "Click Here" button
+        // Click event for "Click Here" button
         document.querySelector('.click-here').addEventListener('click', () => {
             alert('Redirecting to Thumbnails section!');
         });
 
-        // Navigation button functionality (optional, can be expanded)
+        // Navigation button functionality
         document.querySelectorAll('.nav-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 alert(`Navigating to ${btn.textContent} page!`);
