@@ -1,12 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tool UI</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100">
+<body class="bg-gray-100 min-h-screen flex flex-col">
     <!-- Header -->
     <header class="bg-red-500 text-white p-4 flex justify-between items-center shadow-md">
         <h1 class="text-xl font-bold">My Tool</h1>
@@ -18,34 +17,41 @@
                 <li><a href="#" class="hover:underline">History</a></li>
             </ul>
         </nav>
-    </header>
-    
-    <!-- Tool Section -->
-    <section class="container mx-auto p-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+    </header><!-- Tool Section -->
+<main class="flex-grow flex items-center justify-center">
+    <section class="container mx-auto p-6 grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
         <!-- First Card -->
-        <div class="bg-white shadow-lg rounded-lg p-6 text-center relative">
+        <div class="bg-white shadow-lg rounded-lg p-6 text-center relative w-full h-64 flex flex-col justify-center items-center">
             <p class="text-lg font-bold bg-yellow-400 p-3 rounded-lg shadow-md">✨ Confused? 🎨 Get Thumbnails Now!</p>
             <button class="mt-4 bg-blue-500 text-white px-6 py-2 rounded-lg shadow-md">Click Here</button>
         </div>
         
         <!-- Coming Soon Cards -->
-        <div class="bg-white shadow-lg rounded-lg p-6 text-center relative">
+        <div class="bg-white shadow-lg rounded-lg p-6 text-center relative w-full h-64 flex flex-col justify-center items-center">
             <p class="text-2xl font-bold text-gray-600">Coming Soon</p>
         </div>
-        <div class="bg-white shadow-lg rounded-lg p-6 text-center relative">
+        <div class="bg-white shadow-lg rounded-lg p-6 text-center relative w-full h-64 flex flex-col justify-center items-center">
             <p class="text-2xl font-bold text-gray-600">Coming Soon</p>
         </div>
     </section>
-    
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-white p-4 text-center mt-6">
-        <p>© 2025 My Tool. All Rights Reserved.</p>
-        <nav class="mt-2">
-            <a href="#" class="mr-4 hover:underline">Disclaimer</a>
-            <a href="#" class="mr-4 hover:underline">Terms & Conditions</a>
-            <a href="#" class="mr-4 hover:underline">Privacy Policy</a>
-            <a href="#" class="hover:underline">About Us</a>
-        </nav>
-    </footer>
+</main>
+
+<!-- Footer -->
+<footer class="bg-gray-800 text-white p-4 text-center">
+    <p>© 2025 My Tool. All Rights Reserved.</p>
+    <nav class="mt-2">
+        <a href="#" class="mr-4 hover:underline">Disclaimer</a>
+        <a href="#" class="mr-4 hover:underline">Terms & Conditions</a>
+        <a href="#" class="mr-4 hover:underline">Privacy Policy</a>
+        <a href="#" class="hover:underline">About Us</a>
+    </nav>
+</footer>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        console.log("Tool UI Loaded Successfully!");
+    });
+</script>
+
 </body>
 </html>
