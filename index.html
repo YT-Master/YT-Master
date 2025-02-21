@@ -4,8 +4,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tool UI</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            overflow: hidden;
+        }
+    </style>
 </head>
-<body class="bg-gray-100 min-h-screen flex flex-col">
+<body class="bg-blue-100 min-h-screen flex flex-col">
     <!-- Header -->
     <header class="bg-red-500 text-white p-4 flex justify-between items-center shadow-md">
         <h1 class="text-xl font-bold">My Tool</h1>
@@ -19,26 +27,26 @@
         </nav>
     </header><!-- Tool Section -->
 <main class="flex-grow flex items-center justify-center">
-    <section class="container mx-auto p-6 grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
+    <section class="container mx-auto p-6 space-y-6 w-full md:w-3/4">
         <!-- First Card -->
-        <div class="relative rounded-lg overflow-hidden shadow-lg">
-            <img src="https://source.unsplash.com/500x300/?technology" alt="Tool Image" class="w-full h-64 object-cover">
-            <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center text-white p-4">
+        <div class="relative glass-effect shadow-lg p-4 text-white">
+            <img src="https://source.unsplash.com/800x400/?technology" alt="Tool Image" class="w-full h-56 object-cover rounded-lg">
+            <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-end p-4">
                 <p class="text-lg font-bold">✨ Confused? 🎨 Get Thumbnails Now!</p>
-                <button onclick="handleClick()" class="mt-4 bg-blue-500 text-white px-6 py-2 rounded-lg shadow-md">Click Here</button>
+                <button onclick="handleClick()" class="mt-2 bg-yellow-400 text-black px-4 py-2 rounded-lg shadow-md">Click Here</button>
             </div>
         </div>
         
         <!-- Coming Soon Cards -->
-        <div class="relative rounded-lg overflow-hidden shadow-lg">
-            <img src="https://source.unsplash.com/500x300/?future" alt="Coming Soon" class="w-full h-64 object-cover">
-            <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center text-white p-4">
+        <div class="relative glass-effect shadow-lg p-4 text-white">
+            <img src="https://source.unsplash.com/800x400/?future" alt="Coming Soon" class="w-full h-56 object-cover rounded-lg">
+            <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-end p-4">
                 <p class="text-2xl font-bold">Coming Soon</p>
             </div>
         </div>
-        <div class="relative rounded-lg overflow-hidden shadow-lg">
-            <img src="https://source.unsplash.com/500x300/?innovation" alt="Coming Soon" class="w-full h-64 object-cover">
-            <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center text-white p-4">
+        <div class="relative glass-effect shadow-lg p-4 text-white">
+            <img src="https://source.unsplash.com/800x400/?innovation" alt="Coming Soon" class="w-full h-56 object-cover rounded-lg">
+            <div class="absolute inset-0 bg-black bg-opacity-40 flex flex-col justify-end p-4">
                 <p class="text-2xl font-bold">Coming Soon</p>
             </div>
         </div>
