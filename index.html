@@ -23,7 +23,7 @@
         <!-- First Card -->
         <div class="bg-white shadow-lg rounded-lg p-6 text-center relative w-full h-64 flex flex-col justify-center items-center">
             <p class="text-lg font-bold bg-yellow-400 p-3 rounded-lg shadow-md">✨ Confused? 🎨 Get Thumbnails Now!</p>
-            <button class="mt-4 bg-blue-500 text-white px-6 py-2 rounded-lg shadow-md">Click Here</button>
+            <button onclick="handleClick()" class="mt-4 bg-blue-500 text-white px-6 py-2 rounded-lg shadow-md">Click Here</button>
         </div>
         
         <!-- Coming Soon Cards -->
@@ -48,9 +48,9 @@
 </footer>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        console.log("Tool UI Loaded Successfully!");
-    });
+    function handleClick() {
+        alert("Button Clicked! Function is working.");
+    }
 </script>
 
 </body>
