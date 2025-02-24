@@ -1,60 +1,118 @@
-// 1️⃣ YouTube Data API - ভিডিওর টাইটেল খোঁজার জন্য
-async function getYouTubeTitles(query) {
-    let apiKey = "YOUR_YOUTUBE_API_KEY";  // এখানে তোমার YouTube API Key বসাও
-    let url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${query}&key=${apiKey}`;
-    let response = await fetch(url);
-    let data = await response.json();
-    return data.items.map(item => item.snippet.title);
+// Go to Homepage
+function goToHome() {
+    window.location.href = '/';
 }
 
-// 2️⃣ LibreTranslate API - ইংরেজি, বাংলা, হিন্দি ভাষায় অনুবাদ করতে
-async function translateText(text, targetLang) {
-    let url = "https://libretranslate.com/translate";
-    let response = await fetch(url, {
-        method: "POST",
-        body: JSON.stringify({ q: text, source: "auto", target: targetLang }),
-        headers: { "Content-Type": "application/json" }
+// Social Media Share Functionality
+document.querySelectorAll('.social-icon').forEach(icon => {
+    icon.addEventListener('click', (e) => {
+        e.preventDefault();
+        const platform = icon.getAttribute('data-platform');
+        const url = window.location.href;
+        let shareUrl;
+
+        switch (platform) {
+            case 'facebook':
+                shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+                break;
+            case 'whatsapp':
+                shareUrl = `https://api.whatsapp.com/send?text=Check out YT Master! ${encodeURIComponent(url)}`;
+                break;
+            case 'instagram':
+                navigator.clipboard.writeText(url);
+                alert('URL copied to clipboard! Paste it on Instagram.');
+                return;
+        }
+
+        window.open(shareUrl, '_blank', 'width=600,height=400');
     });
-    let data = await response.json();
-    return data.translatedText;
+});
+
+// Box Click Functionality
+document.querySelectorAll('.box').forEach(box => {
+    box.addEventListener('click', (e) => {
+        e.preventDefault();
+        if (box.id === 'box1') {
+            alert('Redirecting to Thumbnail Generator...');
+            // window.location.href = '/thumbnail-generator'; // Add your feature link here
+        } else {
+            alert('This feature is coming soon!');
+        }
+    }, { passive: true });
+});
+
+// Footer Links Functionality with Article Modal
+const articles = {
+    disclaimer: `Disclaimer: This website, YT Master, is provided "as is" without any warranties. We are not responsible for any loss or damage arising from the use of this site. Users access this site at their own risk. For more information, contact us at lankyposture97@gmail.com.
+
+Last Updated: February 22, 2025`,
+    privacy: `Privacy Policy: At YT Master, we respect your privacy. We collect personal information only for enhancing user experience and do not share it with third parties without consent. Cookies are used to improve functionality. You can manage your preferences in your browser settings. Contact us at lankyposture97@gmail.com for data inquiries.
+
+Last Updated: February 22, 2025`,
+    terms: `Terms & Conditions: By using YT Master, you agree to comply with our rules. Unauthorized use, including scraping or spamming, is prohibited. We reserve the right to terminate access for violations. These terms are subject to change; check regularly for updates. Contact us at lankyposture97@gmail.com for clarifications.
+
+Last Updated: February 22, 2025`,
+    about: `About Us: YT Master is your ultimate YouTube companion, offering tools to grow your channel with thumbnails, analytics, and more. Our mission is to help creators succeed on YouTube. Founded in 2025, we are committed to innovation and user satisfaction. Learn more at lankyposture97@gmail.com.
+
+Last Updated: February 22, 2025`
+};
+
+document.querySelectorAll('.footer-link').forEach(link => {
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const page = link.getAttribute('data-page');
+        showArticle(articles[page]);
+    }, { passive: true });
+});
+
+// Email Link Functionality
+document.querySelector('.email-link').addEventListener('click', (e) => {
+    e.preventDefault();
+    window.location.href = 'mailto:lankyposture97@gmail.com';
+}, { passive: true });
+
+// Home Icon Redirect
+document.querySelector('.home-icon').addEventListener('click', (e) => {
+    e.preventDefault();
+    window.location.href = '/';
+}, { passive: true });
+
+// Logo Redirect to Homepage
+document.querySelector('.logo').addEventListener('click', (e) => {
+    e.preventDefault();
+    window.location.href = '/';
+}, { passive: true });
+
+// Toggle Day/Night Mode
+function toggleMode() {
+    const body = document.body;
+    const modeToggle = document.querySelector('.mode-toggle i');
+    body.classList.toggle('night-mode');
+    if (body.classList.contains('night-mode')) {
+        modeToggle.classList.remove('fa-sun');
+        modeToggle.classList.add('fa-moon');
+    } else {
+        modeToggle.classList.remove('fa-moon');
+        modeToggle.classList.add('fa-sun');
+    }
 }
 
-// 3️⃣ Hugging Face API - AI দিয়ে টাইটেল সাজেস্ট করতে
-async function getSuggestedTitles(title) {
-    let apiKey = "YOUR_HUGGING_FACE_API_KEY";  // এখানে তোমার Hugging Face API Key বসাও
-    let url = "https://api-inference.huggingface.co/models/facebook/bart-large-cnn";
-    let response = await fetch(url, {
-        method: "POST",
-        headers: { "Authorization": `Bearer ${apiKey}` },
-        body: JSON.stringify({ inputs: title })
-    });
-    let data = await response.json();
-    return data[0].summary_text;
+// Article Modal Functions
+function showArticle(content) {
+    const modal = document.getElementById('article-modal');
+    const articleText = document.getElementById('article-text');
+    articleText.textContent = content;
+    modal.style.display = 'flex';
 }
 
-// 4️⃣ Canva API - AI দিয়ে থাম্বনেল ডিজাইন করতে
-async function createThumbnail(title) {
-    let apiKey = "YOUR_CANVA_API_KEY";  // এখানে তোমার Canva API Key বসাও
-    let url = `https://api.canva.com/v1/designs?title=${encodeURIComponent(title)}&apiKey=${apiKey}`;
-    let response = await fetch(url);
-    let data = await response.json();
-    return data.thumbnailUrl;
+function hideArticle() {
+    const modal = document.getElementById('article-modal');
+    modal.style.display = 'none';
 }
 
-// 5️⃣ সার্চ বাটন ক্লিক করলে সব API একসাথে কাজ করবে
-async function searchVideo() {
-    let query = document.getElementById("searchBox").value;
-    
-    let youtubeTitles = await getYouTubeTitles(query);
-    let translatedTitle = await translateText(query, "en");
-    let suggestedTitle = await getSuggestedTitles(translatedTitle);
-    let thumbnailUrl = await createThumbnail(suggestedTitle);
-
-    document.getElementById("results").innerHTML = `
-        <h2>✅ Suggested SEO Title: ${suggestedTitle}</h2>
-        <h3>🔍 Other YouTube Titles:</h3>
-        <ul>${youtubeTitles.map(title => `<li>${title}</li>`).join("")}</ul>
-        <h3>🎨 AI-Generated Thumbnail:</h3>
-        <img src="${thumbnailUrl}" alt="Generated Thumbnail">
-    `;
-}
+// Close Article on Click Outside or Close Button
+document.getElementById('article-modal').addEventListener('click', (e) => {
+    if (e.target === document.getElementById('article-modal') || e.target.className === 'close-article') {
+        hideArticle();
+    }
+}, { passive: true });
