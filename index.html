@@ -3,134 +3,130 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YT Master</title>
+    <title>YouTube Thumbnail Finder</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
-        body { background: #f0f0f0; color: #333; min-height: 100vh; display: flex; flex-direction: column; transition: background 0.3s, color 0.3s; }
-        body.night-mode { background: #1a1a1a; color: #f0f0f0; }
-        .header { background: #ff0000; color: white; padding: 10px 15px; display: flex; justify-content: space-between; align-items: center; position: fixed; width: 100%; top: 0; z-index: 1000; height: 50px; }
-        .header.night-mode { background: #cc0000; }
-        .logo { font-size: 1.2em; font-weight: bold; cursor: pointer; }
-        .logo:hover { color: #ffd700; }
-        .header-center { flex-grow: 1; display: flex; align-items: center; justify-content: center; }
-        .grow-text { font: bold 1.2em Arial; position: relative; animation: pop 2s infinite ease-in-out; }
-        .grow-text::before { content: '🌟'; position: absolute; left: -30px; font-size: 1.2em; opacity: 0.7; }
-        .grow-text::after { content: '⚡'; position: absolute; right: -30px; font-size: 1.2em; opacity: 0.7; }
-        @keyframes pop { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.1); opacity: 0.9; } }
-        .social-icons, .header-actions { display: flex; gap: 8px; align-items: center; }
-        .social-icon, .mode-toggle { color: white; font-size: 1.2em; transition: transform 0.3s; cursor: pointer; }
-        .social-icon:hover, .mode-toggle:hover { transform: scale(1.2); }
-        .search-section { margin-top: 50px; padding: 15px; display: flex; justify-content: center; align-items: center; gap: 20px; background: #f0f0f0; transition: background 0.3s; }
-        .search-section.night-mode { background: #1a1a1a; }
-        .search-bar { width: 70%; max-width: 700px; padding: 14px; font: 1.2em Arial; border: none; border-radius: 30px; background: linear-gradient(145deg, #fff, #e0e0e0); box-shadow: 12px 12px 25px rgba(0,0,0,0.25), -12px -12px 25px #fff; transform: perspective(1000px) rotateX(3deg); transition: transform 0.3s, box-shadow 0.3s, background 0.3s; }
-        .search-bar.night-mode { background: linear-gradient(145deg, #404040, #2a2a2a); box-shadow: 12px 12px 25px rgba(0,0,0,0.5), -12px -12px 25px #555; color: #f0f0f0; }
-        .search-bar:hover, .search-bar:focus { transform: perspective(1000px) rotateX(0); box-shadow: 18px 18px 35px rgba(0,0,0,0.3), -18px -18px 35px #fff; outline: none; background: linear-gradient(145deg, #f5f5f5, #dcdcdc); }
-        .search-bar.night-mode:hover, .search-bar.night-mode:focus { background: linear-gradient(145deg, #4d4d4d, #333); }
-        .thumbnail-find-btn { padding: 12px 20px; font: bold 1.2em Arial; color: white; background: linear-gradient(145deg, #ff6666, #ff1a1a); border: none; border-radius: 30px; box-shadow: 12px 12px 25px rgba(0,0,0,0.25), -12px -12px 25px #ff5555; transform: perspective(1000px) rotateX(3deg); cursor: pointer; transition: transform 0.3s, box-shadow 0.3s, background 0.3s; }
-        .thumbnail-find-btn.night-mode { background: linear-gradient(145deg, #cc5555, #cc0000); }
-        .thumbnail-find-btn:hover { transform: perspective(1000px) rotateX(0); box-shadow: 18px 18px 35px rgba(0,0,0,0.3), -18px -18px 35px #ff7777; background: linear-gradient(145deg, #ff4d4d, #ff0000); }
-        .thumbnail-find-btn.night-mode:hover { background: linear-gradient(145deg, #b33c3c, #b30000); }
-        .main-content { flex: 1; margin: 20px 10px 60px; display: flex; flex-direction: column; align-items: center; min-height: calc(100vh - 120px); }
-        .thumbnail-container { width: 100%; max-width: 1200px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; padding: 20px; max-height: 70vh; overflow-y: auto; position: relative; }
-        .thumbnail-item { background: white; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); overflow: hidden; transition: transform 0.3s; cursor: pointer; }
-        .thumbnail-item.night-mode { background: #333; }
-        .thumbnail-item:hover { transform: scale(1.05); }
+        body { background: #f0f0f0; color: #333; min-height: 100vh; display: flex; flex-direction: column; }
+        .header { background: #ff0000; color: white; padding: 15px; text-align: center; font-size: 1.5em; font-weight: bold; position: fixed; width: 100%; top: 0; z-index: 1000; }
+        .search-section { margin-top: 60px; padding: 20px; display: flex; justify-content: center; align-items: center; gap: 10px; }
+        .search-bar { width: 70%; max-width: 500px; padding: 10px; font-size: 1em; border: 1px solid #ddd; border-radius: 5px; }
+        .thumbnail-find-btn { padding: 10px 20px; font-size: 1em; background: #ff0000; color: white; border: none; border-radius: 5px; cursor: pointer; transition: background 0.3s; }
+        .thumbnail-find-btn:hover { background: #cc0000; }
+        .main-content { flex: 1; padding: 20px; display: flex; flex-direction: column; align-items: center; }
+        .thumbnail-container { width: 100%; max-width: 1200px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; padding: 20px; max-height: 70vh; overflow-y: auto; position: relative; }
+        .thumbnail-item { background: white; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); overflow: hidden; cursor: pointer; }
         .thumbnail-item img { width: 100%; height: auto; display: block; }
-        .back-btn { position: absolute; top: 10px; left: 10px; padding: 10px 20px; font: bold 1em Arial; color: white; background: linear-gradient(145deg, #6666ff, #3333ff); border: none; border-radius: 20px; box-shadow: 5px 5px 15px rgba(0,0,0,0.2); cursor: pointer; transition: transform 0.3s, box-shadow 0.3s; display: none; }
-        .back-btn.night-mode { background: linear-gradient(145deg, #5555cc, #2222cc); }
-        .back-btn:hover { transform: scale(1.05); box-shadow: 8px 8px 20px rgba(0,0,0,0.3); }
-        .suggested-titles { width: 100%; max-width: 1200px; padding: 20px; margin-bottom: 60px; text-align: center; }
-        .suggested-titles h3 { font: 1.5em Arial; margin-bottom: 15px; color: #ff0000; }
-        .suggested-titles.night-mode h3 { color: #ff5555; }
-        .title-list { display: flex; flex-direction: column; gap: 10px; align-items: center; }
-        .title-item { background: white; padding: 10px 20px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); width: 80%; max-width: 600px; cursor: pointer; transition: transform 0.3s, box-shadow 0.3s; }
-        .title-item.night-mode { background: #333; color: #f0f0f0; }
-        .title-item:hover { transform: scale(1.02); box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
-        .title-item.copied::after { content: 'Copied!'; position: absolute; right: 20px; color: #ff0000; font: 0.9em Arial; opacity: 0; animation: fade 1.5s ease-in-out; }
-        .title-item.night-mode.copied::after { color: #ff5555; }
-        @keyframes fade { 0%, 100% { opacity: 0; } 20%, 80% { opacity: 1; } }
-        .footer { background: #333; color: white; padding: 10px; text-align: center; width: 100%; height: 50px; position: fixed; bottom: 0; z-index: 1000; display: flex; justify-content: center; align-items: center; }
-        .footer.night-mode { background: #222; }
-        .footer-content { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-        .home-icon { color: white; font-size: 1.2em; transition: transform 0.3s; cursor: pointer; }
-        .home-icon:hover { transform: scale(1.2); }
-        .footer-links { display: flex; gap: 10px; flex-wrap: wrap; }
-        .footer-link, .email-link { color: white; text-decoration: none; font: 0.8em Arial; transition: color 0.3s; cursor: pointer; }
-        .footer-link:hover, .email-link:hover { color: #ff0000; }
-        .article-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1001; justify-content: center; align-items: center; color: white; overflow-y: auto; }
-        .article-content { background: #fff; color: #333; padding: 20px; border-radius: 10px; max-width: 80%; max-height: 80%; box-shadow: 0 5px 15px rgba(0,0,0,0.3); position: relative; }
-        .article-content.night-mode { background: #333; color: #f0f0f0; }
-        .close-article { position: absolute; top: 10px; right: 10px; font-size: 24px; cursor: pointer; color: #ff0000; }
-        @media (max-width: 768px) { .search-bar { width: 75%; font: 0.9em Arial; padding: 10px; } .thumbnail-find-btn { font: bold 0.9em Arial; padding: 10px 15px; } .thumbnail-container { grid-template-columns: repeat(2, 1fr); } .title-item { width: 90%; } }
+        .back-btn { position: absolute; top: 10px; left: 10px; padding: 8px 16px; font-size: 0.9em; background: #4a90e2; color: white; border: none; border-radius: 5px; cursor: pointer; transition: background 0.3s; display: none; }
+        .back-btn:hover { background: #357abd; }
+        .footer { background: #333; color: white; padding: 10px; text-align: center; font-size: 0.9em; }
+        @media (max-width: 768px) { .search-bar { width: 80%; } .thumbnail-container { grid-template-columns: repeat(2, 1fr); } .thumbnail-find-btn { padding: 8px 15px; } }
     </style>
 </head>
 <body>
-    <header class="header">
-        <div class="logo" onclick="goToHome()">YT Master</div>
-        <div class="header-center"><div class="grow-text">Grow Your YouTube Channel</div></div>
-        <div class="header-actions">
-            <a href="#" class="social-icon" data-platform="facebook"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" class="social-icon" data-platform="whatsapp"><i class="fab fa-whatsapp"></i></a>
-            <a href="#" class="social-icon" data-platform="instagram"><i class="fab fa-instagram"></i></a>
-            <button class="mode-toggle" onclick="toggleMode()"><i class="fas fa-sun"></i></button>
-        </div>
-    </header>
-
+    <header class="header">YouTube Thumbnail Finder</header>
     <div class="search-section">
-        <input type="text" class="search-bar" placeholder="Write Your YouTube Video Title">
+        <input type="text" class="search-bar" placeholder="Enter YouTube video title (any language)...">
         <button class="thumbnail-find-btn" onclick="fetchThumbnails()">Thumbnail Find</button>
     </div>
-
     <main class="main-content">
         <div class="thumbnail-container" id="thumbnail-container">
             <button class="back-btn" id="back-btn" onclick="showInitialThumbnails()">Back</button>
         </div>
-        <div class="suggested-titles" id="suggested-tiles">
-            <h3>Suggested SEO-Friendly Titles</h3>
-            <div class="title-list" id="title-list"></div>
-        </div>
     </main>
-
-    <footer class="footer">
-        <div class="footer-content">
-            <div class="footer-links"><a href="#" class="footer-link" data-page="disclaimer">Disclaimer</a><a href="#" class="footer-link" data-page="privacy">Privacy</a></div>
-            <a href="#" class="home-icon"><i class="fas fa-home"></i></a>
-            <div class="footer-links"><a href="#" class="footer-link" data-page="terms">Terms</a><a href="#" class="footer-link" data-page="about">About</a></div>
-            <a href="mailto:lankyposture97@gmail.com" class="email-link">Contact Us</a>
-        </div>
-    </footer>
-
-    <div id="article-modal" class="article-modal">
-        <div class="article-content" id="article-content">
-            <span class="close-article">×</span>
-            <p id="article-text"></p>
-        </div>
-    </div>
+    <footer class="footer">© 2025 YouTube Thumbnail Tool. All rights reserved.</footer>
 
     <script>
         const YOUTUBE_API_KEY = 'AIzaSyAmSkDzuj30xWV_fLpZPJ9BfQYDkwEVWc8';
-        const HUGGING_FACE_API_KEY = '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';
-
-        function goToHome() { window.location.href = '/'; }
-        document.querySelectorAll('.social-icon').forEach(i => i.onclick = e => { e.preventDefault(); const p = i.dataset.platform, u = window.location.href, s = p==='facebook'?'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(u):p==='whatsapp'?'https://api.whatsapp.com/send?text=Check out YT Master! '+encodeURIComponent(u):null; p==='instagram'?navigator.clipboard.writeText(u).then(() => alert('URL copied! Paste on Instagram.')):window.open(s, '_blank', 'width=600,height=400'); });
-        function toggleMode() { const b = document.body, m = document.querySelector('.mode-toggle i'); b.classList.toggle('night-mode'); m.className = b.classList.contains('night-mode') ? 'fas fa-moon' : 'fas fa-sun'; }
-        const a = { disclaimer: 'Disclaimer: YT Master is "as is" without warranties. Not responsible for any loss or damage. Users access at their risk. Contact: lankyposture97@gmail.com. Last Updated: Feb 22, 2025', privacy: 'Privacy: We respect privacy at YT Master, collecting data only for experience, not sharing without consent. Cookies improve functionality. Manage in browser settings. Contact: lankyposture97@gmail.com. Last Updated: Feb 22, 2025', terms: 'Terms: Use YT Master by agreeing to rules. Unauthorized use prohibited. May terminate access for violations. Terms may change; check updates. Contact: lankyposture97@gmail.com. Last Updated: Feb 22, 2025', about: 'About: YT Master helps grow YouTube channels with tools. Mission: help creators succeed. Founded 2025, committed to innovation. Contact: lankyposture97@gmail.com. Last Updated: Feb 22, 2025' };
-        document.querySelectorAll('.footer-link').forEach(l => l.onclick = e => { e.preventDefault(); showArticle(a[l.dataset.page]); });
-        document.querySelector('.email-link').onclick = e => { e.preventDefault(); window.location.href = 'mailto:lankyposture97@gmail.com'; };
-        document.querySelector('.home-icon').onclick = document.querySelector('.logo').onclick = e => { e.preventDefault(); window.location.href = '/'; };
-        function showArticle(c) { document.getElementById('article-text').textContent = c; document.getElementById('article-modal').style.display = 'flex'; }
-        function hideArticle() { document.getElementById('article-modal').style.display = 'none'; }
-        document.getElementById('article-modal').onclick = e => { if (e.target.id === 'article-modal' || e.target.className === 'close-article') hideArticle(); };
-
         let initialThumbnails = [], currentState = 'initial';
-        async function translateText(t) { try { const r = await fetch('https://corsproxy.io/?https://libretranslate.de/translate', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ q: t, source: 'auto', target: 'en', format: 'text' }) }); if (!r.ok) throw new Error('Translation failed'); return (await r.json()).translatedText || t; } catch (e) { console.error('Translation error:', e); return t; } }
-        async function fetchThumbnails() { const q = document.querySelector('.search-bar').value; if (!q) return alert('Enter a YouTube title!'); try { const tq = await translateText(q), u = `https://corsproxy.io/?https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(tq)}&type=video&maxResults=20&key=${YOUTUBE_API_KEY}`, r = await fetch(u); if (!r.ok) throw new Error('API error: ' + r.status); const d = await r.json(); initialThumbnails = d.items || []; displayThumbnails(initialThumbnails, 'initial'); suggestTitles(tq); currentState = 'initial'; } catch (e) { console.error('Thumbnail error:', e); alert('Failed to fetch thumbnails. Check API key, quota, or CORS.'); } }
-        async function fetchRelatedThumbnails(v) { try { const u = `https://corsproxy.io/?https://www.googleapis.com/youtube/v3/search?part=snippet&relatedToVideoId=${v}&type=video&maxResults=10&key=${YOUTUBE_API_KEY}`, r = await fetch(u); if (!r.ok) throw new Error('API error: ' + r.status); const d = await r.json(); displayThumbnails(d.items || [], 'related'); currentState = 'related'; } catch (e) { console.error('Related error:', e); alert('Failed to fetch related thumbnails. Try again.'); } }
-        function displayThumbnails(v, s) { const c = document.getElementById('thumbnail-container'), b = document.getElementById('back-btn'); c.innerHTML = ''; c.appendChild(b); if (!v?.length) { c.innerHTML += '<p>No thumbnails found.</p>'; b.style.display = s === 'related' ? 'block' : 'none'; return; } v.forEach(v => { const u = v.snippet.thumbnails.high.url, i = v.id.videoId || v.id, t = document.createElement('div'); t.classList.add('thumbnail-item'); t.innerHTML = `<img src="${u}" alt="${v.snippet.title}" data-video-id="${i}">`; t.onclick = e => (e.ctrlKey || e.metaKey) ? downloadThumbnail(u) : fetchRelatedThumbnails(i); c.appendChild(t); }); b.style.display = s === 'related' ? 'block' : 'none'; }
-        function showInitialThumbnails() { displayThumbnails(initialThumbnails, 'initial'); currentState = 'initial'; }
-        function downloadThumbnail(u) { const a = document.createElement('a'); a.href = u; a.download = 'thumbnail.jpg'; document.body.appendChild(a); a.click(); document.body.removeChild(a); }
-        async function suggestTitles(q) { const l = document.getElementById('title-list'); l.innerHTML = ''; try { const r = await fetch('https://api-inference.huggingface.co/models/facebook/bart-large-cnn', { method: 'POST', headers: { 'Authorization': `Bearer ${HUGGING_FACE_API_KEY}`, 'Content-Type': 'application/json' }, body: JSON.stringify({ inputs: `5 SEO YouTube titles for: "${q}"` }) }), d = await r.json(), s = d[0]?.generated_text?.split('\n').slice(0, 5) || [`${q} - Best Tips`, `Master ${q} 2025`, `${q} Tutorial`, `Top ${q} Hacks`, `${q} Guide`]; s.forEach(t => { const i = document.createElement('div'); i.classList.add('title-item'); i.textContent = t; i.onclick = () => { navigator.clipboard.writeText(t); i.classList.add('copied'); setTimeout(() => i.classList.remove('copied'), 1500); }; l.appendChild(i); }); } catch (e) { console.error('SEO titles error:', e); ['Best Tips', 'Master 2025', 'Tutorial', 'Top Hacks', 'Guide'].map(t => `${q} ${t}`).forEach(t => { const i = document.createElement('div'); i.classList.add('title-item'); i.textContent = t; i.onclick = () => { navigator.clipboard.writeText(t); i.classList.add('copied'); setTimeout(() => i.classList.remove('copied'), 1500); }; l.appendChild(i); }); } }
+
+        async function translateText(text) {
+            try {
+                const url = 'https://corsproxy.io/?https://libretranslate.de/translate';
+                const response = await fetch(url, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ q: text, source: 'auto', target: 'en', format: 'text' })
+                });
+                if (!response.ok) throw new Error('Translation failed');
+                const data = await response.json();
+                return data.translatedText || text;
+            } catch (e) {
+                console.error('Translation error:', e);
+                return text; // Fallback to original text
+            }
+        }
+
+        async function fetchThumbnails() {
+            const query = document.querySelector('.search-bar').value;
+            if (!query) return alert('Please enter a YouTube video title!');
+            try {
+                const translatedQuery = await translateText(query);
+                const url = `https://corsproxy.io/?https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(translatedQuery)}&type=video&maxResults=20&key=${YOUTUBE_API_KEY}`;
+                const response = await fetch(url);
+                if (!response.ok) throw new Error('API error: ' + response.status);
+                const data = await response.json();
+                initialThumbnails = data.items || [];
+                displayThumbnails(initialThumbnails, 'initial');
+                currentState = 'initial';
+            } catch (e) {
+                console.error('Thumbnail error:', e);
+                alert('Failed to fetch thumbnails. Check API key, quota, or CORS.');
+            }
+        }
+
+        async function fetchRelatedThumbnails(videoId) {
+            try {
+                const url = `https://corsproxy.io/?https://www.googleapis.com/youtube/v3/search?part=snippet&relatedToVideoId=${videoId}&type=video&maxResults=10&key=${YOUTUBE_API_KEY}`;
+                const response = await fetch(url);
+                if (!response.ok) throw new Error('API error: ' + response.status);
+                const data = await response.json();
+                displayThumbnails(data.items || [], 'related');
+                currentState = 'related';
+            } catch (e) {
+                console.error('Related error:', e);
+                alert('Failed to fetch related thumbnails. Try again.');
+            }
+        }
+
+        function displayThumbnails(videos, state) {
+            const container = document.getElementById('thumbnail-container');
+            const backBtn = document.getElementById('back-btn');
+            container.innerHTML = '';
+            container.appendChild(backBtn);
+
+            if (!videos.length) {
+                container.innerHTML += '<p>No thumbnails found.</p>';
+                backBtn.style.display = state === 'related' ? 'block' : 'none';
+                return;
+            }
+
+            videos.forEach(video => {
+                const thumbnailUrl = video.snippet.thumbnails.high?.url || video.snippet.thumbnails.default.url;
+                const videoId = video.id.videoId;
+                const thumbnailItem = document.createElement('div');
+                thumbnailItem.classList.add('thumbnail-item');
+                thumbnailItem.innerHTML = `<img src="${thumbnailUrl}" alt="${video.snippet.title}" data-video-id="${videoId}">`;
+                thumbnailItem.onclick = (e) => (e.ctrlKey || e.metaKey) ? downloadThumbnail(thumbnailUrl) : fetchRelatedThumbnails(videoId);
+                container.appendChild(thumbnailItem);
+            });
+
+            backBtn.style.display = state === 'related' ? 'block' : 'none';
+        }
+
+        function showInitialThumbnails() {
+            displayThumbnails(initialThumbnails, 'initial');
+            currentState = 'initial';
+        }
+
+        function downloadThumbnail(url) {
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'thumbnail.jpg';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
     </script>
 </body>
 </html>
