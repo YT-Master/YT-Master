@@ -3,517 +3,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YT Master - Full Page</title>
+    <title>YT Master</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
-
-        body {
-            background-color: #f0f0f0;
-            color: #333;
-            line-height: 1.6;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        body.night-mode {
-            background-color: #1a1a1a;
-            color: #f0f0f0;
-        }
-
-        .header {
-            background-color: #ff0000;
-            color: white;
-            padding: 10px 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            height: 50px;
-        }
-
-        body.night-mode .header {
-            background-color: #cc0000;
-        }
-
-        .logo {
-            font-size: 1.2em;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .logo:hover {
-            color: #ffd700;
-        }
-
-        .header-center {
-            display: flex;
-            align-items: center;
-            flex-grow: 1;
-            justify-content: center;
-        }
-
-        .grow-text {
-            font-size: 1.2em;
-            font-weight: bold; /* Make text bold */
-            position: relative;
-            animation: continuousPopUp 2s infinite ease-in-out;
-        }
-
-        .grow-text::before {
-            content: '🌟';
-            position: absolute;
-            left: -30px; /* Adjusted distance */
-            font-size: 1.2em;
-            opacity: 0.7;
-        }
-
-        .grow-text::after {
-            content: '⚡';
-            position: absolute;
-            right: -30px; /* Adjusted distance */
-            font-size: 1.2em;
-            opacity: 0.7;
-        }
-
-        @keyframes continuousPopUp {
-            0% { transform: scale(1); opacity: 1; }
-            50% { transform: scale(1.1); opacity: 0.9; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
-        .social-icons, .header-actions {
-            display: flex;
-            gap: 8px;
-            align-items: center;
-        }
-
-        .social-icon, .mode-toggle {
-            color: white;
-            font-size: 1.2em;
-            transition: transform 0.3s;
-            cursor: pointer;
-        }
-
-        .social-icon:hover, .mode-toggle:hover {
-            transform: scale(1.2);
-        }
-
-        .main-content {
-            flex: 1;
-            margin: 60px 10px 60px;
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            align-items: center;
-            justify-content: center;
-            min-height: calc(100vh - 120px);
-        }
-
-        .box {
-            width: 100%;
-            max-width: 500px;
-            height: 250px;
-            background-color: white;
-            border-radius: 15px;
-            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.25);
-            transform: perspective(1000px) rotateX(5deg);
-            transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 20px;
-            border: 1px solid #ddd;
-            cursor: pointer;
-        }
-
-        body.night-mode .box {
-            background-color: #333;
-            border-color: #555;
-            color: #f0f0f0;
-        }
-
-        .box:hover {
-            transform: perspective(1000px) rotateX(0deg);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        .box-title {
-            font-size: 2em;
-            color: #ff0000;
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-            animation: fadeIn 1s ease-in-out;
-        }
-
-        body.night-mode .box-title {
-            color: #ff5555;
-        }
-
-        .box-subtitle {
-            font-size: 1.4em;
-            color: #333;
-            margin: 10px 0;
-            animation: fadeIn 1.5s ease-in-out;
-        }
-
-        body.night-mode .box-subtitle {
-            color: #ccc;
-        }
-
-        .action-box {
-            background-color: #ff0000;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 5px;
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-            transition: background-color 0.3s;
-            font-size: 1em;
-            margin-top: 15px;
-            cursor: pointer;
-        }
-
-        body.night-mode .action-box {
-            background-color: #cc0000;
-        }
-
-        .action-box:hover {
-            background-color: #cc0000;
-        }
-
-        body.night-mode .action-box:hover {
-            background-color: #aa0000;
-        }
-
-        .footer {
-            background-color: #333;
-            color: white;
-            padding: 10px;
-            text-align: center;
-            width: 100%;
-            height: 50px;
-            position: fixed;
-            bottom: 0;
-            z-index: 1000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        body.night-mode .footer {
-            background-color: #222;
-        }
-
-        .footer-content {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        .home-icon {
-            color: white;
-            font-size: 1.2em;
-            transition: transform 0.3s;
-            cursor: pointer;
-        }
-
-        .home-icon:hover {
-            transform: scale(1.2);
-        }
-
-        .footer-links {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        .footer-link, .email-link {
-            color: white;
-            text-decoration: none;
-            font-size: 0.8em;
-            transition: color 0.3s;
-            cursor: pointer;
-            -webkit-tap-highlight-color: transparent;
-            touch-action: manipulation;
-        }
-
-        .footer-link:hover, .email-link:hover {
-            color: #ff0000;
-        }
-
-        .article-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            z-index: 1001;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            overflow-y: auto;
-        }
-
-        .article-content {
-            background-color: #fff;
-            color: #333;
-            padding: 20px;
-            border-radius: 10px;
-            max-width: 80%;
-            max-height: 80%;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            position: relative;
-        }
-
-        body.night-mode .article-content {
-            background-color: #333;
-            color: #f0f0f0;
-        }
-
-        .close-article {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            font-size: 24px;
-            cursor: pointer;
-            color: #ff0000;
-        }
-
-        /* Responsive Design for Mobile */
-        @media (max-width: 768px) {
-            .header {
-                height: 40px;
-                padding: 5px 10px;
-                justify-content: space-between;
-            }
-
-            .logo {
-                font-size: 1em;
-            }
-
-            .header-center {
-                display: flex; /* মোবাইলে লেখাটি দেখানো */
-                justify-content: center;
-            }
-
-            .grow-text {
-                font-size: 0.9em; /* মোবাইলে ছোট ফন্ট */
-            }
-
-            .grow-text::before, .grow-text::after {
-                font-size: 0.9em; /* মোবাইলে ছোট আইকন */
-            }
-
-            .social-icons, .header-actions {
-                gap: 5px;
-            }
-
-            .social-icon, .mode-toggle {
-                font-size: 1em;
-            }
-
-            .main-content {
-                margin: 50px 5px;
-                gap: 15px;
-            }
-
-            .box {
-                max-width: 100%;
-                height: 180px;
-                padding: 15px;
-            }
-
-            .box-title {
-                font-size: 1.5em;
-            }
-
-            .box-subtitle {
-                font-size: 1.1em;
-                margin: 8px 0;
-            }
-
-            .action-box {
-                padding: 8px 15px;
-                font-size: 0.9em;
-                margin-top: 10px;
-            }
-
-            .footer {
-                height: 40px;
-                padding: 5px;
-            }
-
-            .footer-content {
-                flex-direction: row;
-                justify-content: center;
-                gap: 5px;
-            }
-
-            .home-icon {
-                font-size: 1em;
-            }
-
-            .footer-links {
-                flex-direction: row;
-                gap: 5px;
-            }
-
-            .footer-link, .email-link {
-                font-size: 0.7em;
-            }
-
-            .article-content {
-                max-width: 90%;
-                padding: 15px;
-            }
-        }
-
-        /* Responsive Design for Desktop */
-        @media (min-width: 769px) {
-            .header {
-                height: 50px;
-                padding: 10px 20px;
-                justify-content: space-between;
-            }
-
-            .logo {
-                font-size: 1.5em;
-            }
-
-            .header-center {
-                justify-content: center;
-            }
-
-            .grow-text {
-                font-size: 1.5em;
-            }
-
-            .grow-text::before, .grow-text::after {
-                font-size: 1.5em;
-            }
-
-            .social-icon, .mode-toggle {
-                font-size: 1.5em;
-            }
-
-            .main-content {
-                margin: 60px 10px;
-                gap: 20px;
-            }
-
-            .box {
-                max-width: 500px;
-                height: 250px;
-                padding: 20px;
-            }
-
-            .box-title {
-                font-size: 2em;
-            }
-
-            .box-subtitle {
-                font-size: 1.4em;
-                margin: 10px 0;
-            }
-
-            .action-box {
-                padding: 10px 20px;
-                font-size: 1em;
-                margin-top: 15px;
-            }
-
-            .footer {
-                height: 50px;
-                padding: 10px;
-            }
-
-            .footer-content {
-                flex-direction: row;
-                justify-content: center;
-                gap: 20px;
-            }
-
-            .home-icon {
-                font-size: 1.5em;
-            }
-
-            .footer-links {
-                flex-direction: row;
-                gap: 15px;
-            }
-
-            .footer-link, .email-link {
-                font-size: 0.9em;
-            }
-
-            .article-content {
-                max-width: 80%;
-                padding: 20px;
-            }
-        }
-
-        /* Animation */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+        body { background: #f0f0f0; color: #333; min-height: 100vh; display: flex; flex-direction: column; transition: background 0.3s, color 0.3s; }
+        body.night-mode { background: #1a1a1a; color: #f0f0f0; }
+        .header { background: #ff0000; color: white; padding: 10px 15px; display: flex; justify-content: space-between; align-items: center; position: fixed; width: 100%; top: 0; z-index: 1000; height: 50px; }
+        .header.night-mode { background: #cc0000; }
+        .logo { font-size: 1.2em; font-weight: bold; cursor: pointer; }
+        .logo:hover { color: #ffd700; }
+        .header-center { display: flex; align-items: center; flex-grow: 1; justify-content: center; }
+        .grow-text { font-size: 1.2em; font-weight: bold; position: relative; animation: pop 2s infinite ease-in-out; }
+        .grow-text::before { content: '🌟'; position: absolute; left: -30px; font-size: 1.2em; opacity: 0.7; }
+        .grow-text::after { content: '⚡'; position: absolute; right: -30px; font-size: 1.2em; opacity: 0.7; }
+        @keyframes pop { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.1); opacity: 0.9; } }
+        .social-icons, .header-actions { display: flex; gap: 8px; align-items: center; }
+        .social-icon, .mode-toggle { color: white; font-size: 1.2em; transition: transform 0.3s; cursor: pointer; }
+        .social-icon:hover, .mode-toggle:hover { transform: scale(1.2); }
+        .search-section { margin-top: 50px; padding: 15px; display: flex; justify-content: center; align-items: center; gap: 20px; background: #f0f0f0; transition: background 0.3s; }
+        .search-section.night-mode { background: #1a1a1a; }
+        .search-bar { width: 70%; max-width: 700px; padding: 14px; font-size: 1.2em; border: none; border-radius: 30px; background: linear-gradient(145deg, #fff, #e0e0e0); box-shadow: 12px 12px 25px rgba(0,0,0,0.25), -12px -12px 25px #fff; transform: perspective(1000px) rotateX(3deg); transition: transform 0.3s, box-shadow 0.3s, background 0.3s; }
+        .search-bar.night-mode { background: linear-gradient(145deg, #404040, #2a2a2a); box-shadow: 12px 12px 25px rgba(0,0,0,0.5), -12px -12px 25px #555; color: #f0f0f0; }
+        .search-bar:hover, .search-bar:focus { transform: perspective(1000px) rotateX(0); box-shadow: 18px 18px 35px rgba(0,0,0,0.3), -18px -18px 35px #fff; outline: none; background: linear-gradient(145deg, #f5f5f5, #dcdcdc); }
+        .search-bar.night-mode:hover, .search-bar.night-mode:focus { background: linear-gradient(145deg, #4d4d4d, #333); }
+        .thumbnail-find-btn { padding: 12px 20px; font-size: 1.2em; font-weight: bold; color: white; background: linear-gradient(145deg, #ff6666, #ff1a1a); border: none; border-radius: 30px; box-shadow: 12px 12px 25px rgba(0,0,0,0.25), -12px -12px 25px #ff5555; transform: perspective(1000px) rotateX(3deg); cursor: pointer; transition: transform 0.3s, box-shadow 0.3s, background 0.3s; }
+        .thumbnail-find-btn.night-mode { background: linear-gradient(145deg, #cc5555, #cc0000); }
+        .thumbnail-find-btn:hover { transform: perspective(1000px) rotateX(0); box-shadow: 18px 18px 35px rgba(0,0,0,0.3), -18px -18px 35px #ff7777; background: linear-gradient(145deg, #ff4d4d, #ff0000); }
+        .thumbnail-find-btn.night-mode:hover { background: linear-gradient(145deg, #b33c3c, #b30000); }
+        .main-content { flex: 1; margin: 20px 10px 60px; display: flex; flex-direction: column; align-items: center; min-height: calc(100vh - 120px); }
+        .thumbnail-container { width: 100%; max-width: 1200px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; padding: 20px; max-height: 70vh; overflow-y: auto; position: relative; }
+        .thumbnail-item { background: white; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); overflow: hidden; transition: transform 0.3s; cursor: pointer; }
+        .thumbnail-item.night-mode { background: #333; }
+        .thumbnail-item:hover { transform: scale(1.05); }
+        .thumbnail-item img { width: 100%; height: auto; display: block; }
+        .back-btn { position: absolute; top: 10px; left: 10px; padding: 10px 20px; font-size: 1em; font-weight: bold; color: white; background: linear-gradient(145deg, #6666ff, #3333ff); border: none; border-radius: 20px; box-shadow: 5px 5px 15px rgba(0,0,0,0.2); cursor: pointer; transition: transform 0.3s, box-shadow 0.3s; display: none; }
+        .back-btn.night-mode { background: linear-gradient(145deg, #5555cc, #2222cc); }
+        .back-btn:hover { transform: scale(1.05); box-shadow: 8px 8px 20px rgba(0,0,0,0.3); }
+        .suggested-titles { width: 100%; max-width: 1200px; padding: 20px; margin-bottom: 60px; text-align: center; }
+        .suggested-titles h3 { font-size: 1.5em; margin-bottom: 15px; color: #ff0000; }
+        .suggested-titles.night-mode h3 { color: #ff5555; }
+        .title-list { display: flex; flex-direction: column; gap: 10px; align-items: center; }
+        .title-item { background: white; padding: 10px 20px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); width: 80%; max-width: 600px; cursor: pointer; transition: transform 0.3s, box-shadow 0.3s; }
+        .title-item.night-mode { background: #333; color: #f0f0f0; }
+        .title-item:hover { transform: scale(1.02); box-shadow: 0 8px 20px rgba(0,0,0,0.15); }
+        .title-item.copied::after { content: 'Copied!'; position: absolute; right: 20px; color: #ff0000; font-size: 0.9em; opacity: 0; animation: fade 1.5s ease-in-out; }
+        .title-item.night-mode.copied::after { color: #ff5555; }
+        @keyframes fade { 0%, 100% { opacity: 0; } 20%, 80% { opacity: 1; } }
+        .footer { background: #333; color: white; padding: 10px; text-align: center; width: 100%; height: 50px; position: fixed; bottom: 0; z-index: 1000; display: flex; justify-content: center; align-items: center; }
+        .footer.night-mode { background: #222; }
+        .footer-content { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+        .home-icon { color: white; font-size: 1.2em; transition: transform 0.3s; cursor: pointer; }
+        .home-icon:hover { transform: scale(1.2); }
+        .footer-links { display: flex; gap: 10px; flex-wrap: wrap; }
+        .footer-link, .email-link { color: white; text-decoration: none; font-size: 0.8em; transition: color 0.3s; cursor: pointer; }
+        .footer-link:hover, .email-link:hover { color: #ff0000; }
+        .article-modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1001; justify-content: center; align-items: center; color: white; overflow-y: auto; }
+        .article-content { background: #fff; color: #333; padding: 20px; border-radius: 10px; max-width: 80%; max-height: 80%; box-shadow: 0 5px 15px rgba(0,0,0,0.3); position: relative; }
+        .article-content.night-mode { background: #333; color: #f0f0f0; }
+        .close-article { position: absolute; top: 10px; right: 10px; font-size: 24px; cursor: pointer; color: #ff0000; }
+        @media (max-width: 768px) { .search-bar { width: 75%; font-size: 0.9em; padding: 10px; } .thumbnail-find-btn { font-size: 0.9em; padding: 10px 15px; } .thumbnail-container { grid-template-columns: repeat(2, 1fr); } .title-item { width: 90%; } }
     </style>
 </head>
 <body>
     <header class="header">
         <div class="logo" onclick="goToHome()">YT Master</div>
-        <div class="header-center">
-            <div class="grow-text">Grow Your YouTube Channel</div>
-        </div>
+        <div class="header-center"><div class="grow-text">Grow Your YouTube Channel</div></div>
         <div class="header-actions">
             <a href="#" class="social-icon" data-platform="facebook"><i class="fab fa-facebook-f"></i></a>
             <a href="#" class="social-icon" data-platform="whatsapp"><i class="fab fa-whatsapp"></i></a>
             <a href="#" class="social-icon" data-platform="instagram"><i class="fab fa-instagram"></i></a>
-            <button class="mode-toggle" onclick="toggleMode()">
-                <i class="fas fa-sun"></i>
-            </button>
+            <button class="mode-toggle" onclick="toggleMode()"><i class="fas fa-sun"></i></button>
         </div>
     </header>
 
+    <div class="search-section">
+        <input type="text" class="search-bar" placeholder="Write Your YouTube Video Title">
+        <button class="thumbnail-find-btn" onclick="fetchThumbnails()">Thumbnail Find</button>
+    </div>
+
     <main class="main-content">
-        <div class="box" id="box1">
-            <h2 class="box-title">✨ Confused?</h2>
-            <p class="box-subtitle">🎨 Get Thumbnails Now!</p>
-            <div class="action-box">Click Here</div>
+        <div class="thumbnail-container" id="thumbnail-container">
+            <button class="back-btn" id="back-btn" onclick="showInitialThumbnails()">Back</button>
         </div>
-        <div class="box" id="box2">
-            <h2 class="box-title">Coming Soon Features</h2>
-        </div>
-        <div class="box" id="box3">
-            <h2 class="box-title">Coming Soon Features</h2>
+        <div class="suggested-titles" id="suggested-titles">
+            <h3>Suggested SEO-Friendly Titles</h3>
+            <div class="title-list" id="title-list"></div>
         </div>
     </main>
 
     <footer class="footer">
         <div class="footer-content">
-            <div class="footer-links">
-                <a href="#" class="footer-link" data-page="disclaimer">Disclaimer</a>
-                <a href="#" class="footer-link" data-page="privacy">Privacy Policy</a>
-            </div>
+            <div class="footer-links"><a href="#" class="footer-link" data-page="disclaimer">Disclaimer</a><a href="#" class="footer-link" data-page="privacy">Privacy</a></div>
             <a href="#" class="home-icon"><i class="fas fa-home"></i></a>
-            <div class="footer-links">
-                <a href="#" class="footer-link" data-page="terms">Terms & Conditions</a>
-                <a href="#" class="footer-link" data-page="about">About Us</a>
-            </div>
+            <div class="footer-links"><a href="#" class="footer-link" data-page="terms">Terms</a><a href="#" class="footer-link" data-page="about">About</a></div>
             <a href="mailto:lankyposture97@gmail.com" class="email-link">Contact Us</a>
         </div>
     </footer>
@@ -526,124 +109,28 @@
     </div>
 
     <script>
-        // Go to Homepage
-        function goToHome() {
-            window.location.href = '/';
-        }
+        const YOUTUBE_API_KEY = 'AIzaSyAmSkDzuj30xWV_fLpZPJ9BfQYDkwEVWc8';
+        const HUGGING_FACE_API_KEY = 'YOUR_NEW_HUGGING_FACE_API_KEY'; // Replace with your new Hugging Face API Key after revoking the old one
 
-        // Social Media Share Functionality
-        document.querySelectorAll('.social-icon').forEach(icon => {
-            icon.addEventListener('click', (e) => {
-                e.preventDefault();
-                const platform = icon.getAttribute('data-platform');
-                const url = window.location.href;
-                let shareUrl;
+        function goToHome() { window.location.href = '/'; }
+        document.querySelectorAll('.social-icon').forEach(icon => icon.onclick = e => { e.preventDefault(); const p = icon.dataset.platform, u = window.location.href, s = p==='facebook'?'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(u):p==='whatsapp'?'https://api.whatsapp.com/send?text=Check out YT Master! '+encodeURIComponent(u):null; p==='instagram'?navigator.clipboard.writeText(u).then(() => alert('URL copied to clipboard! Paste it on Instagram.')):window.open(s, '_blank', 'width=600,height=400'); });
+        function toggleMode() { const b = document.body, m = document.querySelector('.mode-toggle i'); b.classList.toggle('night-mode'); m.className = b.classList.contains('night-mode') ? 'fas fa-moon' : 'fas fa-sun'; }
+        const articles = { disclaimer: 'Disclaimer: This website, YT Master, is provided "as is" without any warranties. We are not responsible for any loss or damage arising from the use of this site. Users access this site at their own risk. For more information, contact us at lankyposture97@gmail.com. Last Updated: February 22, 2025', privacy: 'Privacy Policy: At YT Master, we respect your privacy. We collect personal info only for enhancing user experience and do not share it with third parties without consent. Cookies improve functionality. Manage preferences in browser settings. Contact us at lankyposture97@gmail.com. Last Updated: February 22, 2025', terms: 'Terms & Conditions: By using YT Master, you agree to comply with our rules. Unauthorized use, including scraping or spamming, is prohibited. We reserve the right to terminate access for violations. Terms may change; check regularly for updates. Contact us at lankyposture97@gmail.com. Last Updated: February 22, 2025', about: 'About Us: YT Master is your ultimate YouTube companion, offering tools to grow your channel with thumbnails, analytics, and more. Our mission is to help creators succeed on YouTube. Founded in 2025, we are committed to innovation and user satisfaction. Learn more at lankyposture97@gmail.com. Last Updated: February 22, 2025' };
+        document.querySelectorAll('.footer-link').forEach(l => l.onclick = e => { e.preventDefault(); showArticle(articles[l.dataset.page]); });
+        document.querySelector('.email-link').onclick = e => { e.preventDefault(); window.location.href = 'mailto:lankyposture97@gmail.com'; };
+        document.querySelector('.home-icon').onclick = document.querySelector('.logo').onclick = e => { e.preventDefault(); window.location.href = '/'; };
+        function showArticle(c) { document.getElementById('article-text').textContent = c; document.getElementById('article-modal').style.display = 'flex'; }
+        function hideArticle() { document.getElementById('article-modal').style.display = 'none'; }
+        document.getElementById('article-modal').onclick = e => { if (e.target.id === 'article-modal' || e.target.className === 'close-article') hideArticle(); };
 
-                switch (platform) {
-                    case 'facebook':
-                        shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
-                        break;
-                    case 'whatsapp':
-                        shareUrl = `https://api.whatsapp.com/send?text=Check out YT Master! ${encodeURIComponent(url)}`;
-                        break;
-                    case 'instagram':
-                        navigator.clipboard.writeText(url);
-                        alert('URL copied to clipboard! Paste it on Instagram.');
-                        return;
-                }
-
-                window.open(shareUrl, '_blank', 'width=600,height=400');
-            });
-        });
-
-        // Box Click Functionality
-        document.querySelectorAll('.box').forEach(box => {
-            box.addEventListener('click', (e) => {
-                e.preventDefault();
-                if (box.id === 'box1') {
-                    alert('Redirecting to Thumbnail Generator...');
-                    // window.location.href = '/thumbnail-generator'; // Add your feature link here
-                } else {
-                    alert('This feature is coming soon!');
-                }
-            }, { passive: true }); // Ensure touch events work on mobile
-        });
-
-        // Footer Links Functionality with Article Modal
-        const articles = {
-            disclaimer: `Disclaimer: This website, YT Master, is provided "as is" without any warranties. We are not responsible for any loss or damage arising from the use of this site. Users access this site at their own risk. For more information, contact us at lankyposture97@gmail.com.
-
-Last Updated: February 22, 2025`,
-            privacy: `Privacy Policy: At YT Master, we respect your privacy. We collect personal information only for enhancing user experience and do not share it with third parties without consent. Cookies are used to improve functionality. You can manage your preferences in your browser settings. Contact us at lankyposture97@gmail.com for data inquiries.
-
-Last Updated: February 22, 2025`,
-            terms: `Terms & Conditions: By using YT Master, you agree to comply with our rules. Unauthorized use, including scraping or spamming, is prohibited. We reserve the right to terminate access for violations. These terms are subject to change; check regularly for updates. Contact us at lankyposture97@gmail.com for clarifications.
-
-Last Updated: February 22, 2025`,
-            about: `About Us: YT Master is your ultimate YouTube companion, offering tools to grow your channel with thumbnails, analytics, and more. Our mission is to help creators succeed on YouTube. Founded in 2025, we are committed to innovation and user satisfaction. Learn more at lankyposture97@gmail.com.
-
-Last Updated: February 22, 2025`
-        };
-
-        document.querySelectorAll('.footer-link').forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const page = link.getAttribute('data-page');
-                showArticle(articles[page]);
-            }, { passive: true });
-        });
-
-        // Email Link Functionality
-        document.querySelector('.email-link').addEventListener('click', (e) => {
-            e.preventDefault();
-            window.location.href = 'mailto:lankyposture97@gmail.com';
-        }, { passive: true });
-
-        // Home Icon Redirect
-        document.querySelector('.home-icon').addEventListener('click', (e) => {
-            e.preventDefault();
-            window.location.href = '/';
-        }, { passive: true });
-
-        // Logo Redirect to Homepage
-        document.querySelector('.logo').addEventListener('click', (e) => {
-            e.preventDefault();
-            window.location.href = '/';
-        }, { passive: true });
-
-        // Toggle Day/Night Mode
-        function toggleMode() {
-            const body = document.body;
-            const modeToggle = document.querySelector('.mode-toggle i');
-            body.classList.toggle('night-mode');
-            if (body.classList.contains('night-mode')) {
-                modeToggle.classList.remove('fa-sun');
-                modeToggle.classList.add('fa-moon');
-            } else {
-                modeToggle.classList.remove('fa-moon');
-                modeToggle.classList.add('fa-sun');
-            }
-        }
-
-        // Article Modal Functions
-        function showArticle(content) {
-            const modal = document.getElementById('article-modal');
-            const articleText = document.getElementById('article-text');
-            articleText.textContent = content;
-            modal.style.display = 'flex';
-        }
-
-        function hideArticle() {
-            const modal = document.getElementById('article-modal');
-            modal.style.display = 'none';
-        }
-
-        // Close Article on Click Outside or Close Button
-        document.getElementById('article-modal').addEventListener('click', (e) => {
-            if (e.target === document.getElementById('article-modal') || e.target.className === 'close-article') {
-                hideArticle();
-            }
-        }, { passive: true });
+        let initialThumbnails = [], currentState = 'initial';
+        async function translateText(t) { const r = await fetch('https://cors-anywhere.herokuapp.com/https://libretranslate.de/translate', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ q: t, source: 'auto', target: 'en', format: 'text' }) }); return (await r.json()).translatedText; }
+        async function fetchThumbnails() { const q = document.querySelector('.search-bar').value; if (!q) return alert('Please enter a YouTube video title!'); try { const tq = await translateText(q), u = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(tq)}&type=video&maxResults=20&key=${YOUTUBE_API_KEY}`, r = await fetch(u), d = await r.json(); initialThumbnails = d.items || []; displayThumbnails(initialThumbnails, 'initial'); suggestTitles(tq); currentState = 'initial'; } catch (e) { console.error(e); alert('Failed to fetch thumbnails. Try again later.'); } }
+        async function fetchRelatedThumbnails(v) { try { const u = `https://www.googleapis.com/youtube/v3/search?part=snippet&relatedToVideoId=${v}&type=video&maxResults=10&key=${YOUTUBE_API_KEY}`, r = await fetch(u), d = await r.json(); displayThumbnails(d.items || [], 'related'); currentState = 'related'; } catch (e) { console.error(e); alert('Failed to fetch related thumbnails. Try again later.'); } }
+        function displayThumbnails(v, s) { const c = document.getElementById('thumbnail-container'), b = document.getElementById('back-btn'); c.innerHTML = ''; c.appendChild(b); if (!v?.length) { c.innerHTML += '<p>No thumbnails found.</p>'; b.style.display = s === 'related' ? 'block' : 'none'; return; } v.forEach(video => { const u = video.snippet.thumbnails.high.url, id = video.id.videoId || video.id, t = document.createElement('div'); t.classList.add('thumbnail-item'); t.innerHTML = `<img src="${u}" alt="${video.snippet.title}" data-video-id="${id}">`; t.onclick = e => (e.ctrlKey || e.metaKey) ? downloadThumbnail(u) : fetchRelatedThumbnails(id); c.appendChild(t); }); b.style.display = s === 'related' ? 'block' : 'none'; }
+        function showInitialThumbnails() { displayThumbnails(initialThumbnails, 'initial'); currentState = 'initial'; }
+        function downloadThumbnail(u) { const a = document.createElement('a'); a.href = u; a.download = 'thumbnail.jpg'; document.body.appendChild(a); a.click(); document.body.removeChild(a); }
+        async function suggestTitles(q) { const l = document.getElementById('title-list'); l.innerHTML = ''; try { const r = await fetch('https://api-inference.huggingface.co/models/facebook/bart-large-cnn', { method: 'POST', headers: { 'Authorization': `Bearer ${HUGGING_FACE_API_KEY}`, 'Content-Type': 'application/json' }, body: JSON.stringify({ inputs: `Generate 5 SEO-friendly YouTube titles based on: "${q}"` }) }), d = await r.json(), s = d[0]?.generated_text?.split('\n').slice(0, 5) || [`${q} - Best Tips`, `How to Master ${q} in 2025`, `${q} Tutorial`, `Top 5 ${q} Hacks`, `${q} Guide`]; s.forEach(t => { const i = document.createElement('div'); i.classList.add('title-item'); i.textContent = t; i.onclick = () => { navigator.clipboard.writeText(t); i.classList.add('copied'); setTimeout(() => i.classList.remove('copied'), 1500); }; l.appendChild(i); }); } catch (e) { console.error(e); ['Best Tips', '2025 Master', 'Tutorial', 'Top 5 Hacks', 'Guide'].map(t => `${q} ${t}`).forEach(t => { const i = document.createElement('div'); i.classList.add('title-item'); i.textContent = t; i.onclick = () => { navigator.clipboard.writeText(t); i.classList.add('copied'); setTimeout(() => i.classList.remove('copied'), 1500); }; l.appendChild(i); }); } }
     </script>
 </body>
-    </html>
+</html>
